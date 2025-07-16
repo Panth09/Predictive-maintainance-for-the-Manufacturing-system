@@ -1,0 +1,31 @@
+import tkinter as tk
+import webbrowser
+from threading import Thread
+import subprocess
+
+# Function to start the Flask app in a separate thread
+def start_flask_app():
+    subprocess.Popen(["python", "app.py"])  # Adjust the path to your app.py file if necessary
+
+# Function to open the Flask dashboard in the default web browser
+def open_dashboard():
+    webbrowser.open("http://127.0.0.1:5000")  # URL of the Flask app
+
+# Create the Tkinter GUI
+def create_gui():
+    root = tk.Tk()
+    root.title("Machine Monitoring System")
+
+    # Add a button to open the Flask dashboard
+    open_button = tk.Button(root, text="Open Dashboard", command=open_dashboard, bg="#0078d7", fg="white", font=("Arial", 14))
+    open_button.pack(pady=20)
+
+    # Run the Tkinter main loop
+    root.mainloop()
+
+# Start the Flask app in a separate thread
+flask_thread = Thread(target=start_flask_app, daemon=True)
+flask_thread.start()
+
+# Start the Tkinter GUI
+create_gui()

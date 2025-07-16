@@ -1,0 +1,29 @@
+[
+    {
+        "temperature": 71.65,
+        "vibration": 0.17,
+        "pressure": 3.15,
+        "humidity": 68.19,
+        "runtime": 6179,
+        "load": 0.0,
+        "speed": 1063
+    },
+    {
+        "temperature": 30.52,
+        "vibration": 2.4,
+        "pressure": 9.79,
+        "humidity": 38.99,
+        "runtime": 8730,
+        "load": 0.82,
+        "speed": 2492
+    },
+    {
+        "temperature": 94.26,
+        "vibration": 2.41,
+        "pressure": 9.41,
+        "humidity": 45.02,
+        "runtime": 3234,
+        "load": 0.7,
+        "speed": 1312
+    }
+]

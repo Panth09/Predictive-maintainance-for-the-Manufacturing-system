@@ -1,0 +1,94 @@
+import webbrowser  # Import webbrowser to open the default browser
+
+class PredictionApp:
+    # ... existing code ...
+
+    def create_model_info_tab(self):
+        """Create the tab for model information"""
+        info_tab = ttk.Frame(self.notebook)
+        self.notebook.add(info_tab, text="Model Information")
+
+        # Title
+        title = ttk.Label(info_tab, text="Machine Learning Model Information", style="Header.TLabel")
+        title.pack(pady=(20, 10))
+
+        # Model info frame
+        info_frame = ttk.LabelFrame(info_tab, text="Model Details", padding=10)
+        info_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+        # Description text
+        description = """
+        This application uses machine learning to predict manufacturing efficiency in a 6G-enabled environment.
+        
+        The model is trained on various parameters that affect manufacturing processes:
+        
+        Basic Manufacturing Parameters:
+        - Machine ID: Unique identifier for each machine
+        - Operation Mode: Current operational state (Idle, Active, Maintenance)
+        - Temperature: Operating temperature in Celsius
+        - Vibration: Vibration level in Hz
+        - Power Consumption: Energy usage in kilowatts
+        
+        Network and Communication Parameters:
+        - Network Latency: Communication delay in milliseconds
+        - Packet Loss: Data transmission loss percentage
+        
+        Quality and Performance Parameters:
+        - Quality Control Defect Rate: Percentage of defective products
+        - Production Speed: Units produced per hour
+        - Predictive Maintenance Score: System health indicator (0-100)
+        - Error Rate: Process error percentage
+        
+        The prediction classifies efficiency as LOW, MEDIUM, or HIGH based on 
+        these parameters.
+        
+        You can make individual predictions or process an entire dataset in batch mode.
+        """
+
+        info_text = tk.Text(info_frame, wrap=tk.WORD, height=20, width=60)
+        info_text.insert(tk.END, description)
+        info_text.config(state=tk.DISABLED)  # Make read-only
+        info_text.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+
+        # Buttons frame
+        button_frame = ttk.Frame(info_tab)
+        button_frame.pack(pady=20)
+
+        # Training button
+        train_btn = ttk.Button(
+            button_frame,
+            text="Train New Model",
+            command=self.train_model_dialog,
+            width=20
+        )
+        train_btn.pack(side=tk.LEFT, padx=10)
+
+        # Open Dashboard button
+        dashboard_btn = ttk.Button(
+            button_frame,
+            text="Open Dashboard",
+            command=self.open_dashboard,
+            width=20
+        )
+        dashboard_btn.pack(side=tk.LEFT, padx=10)
+
+        # Open App button
+        app_btn = ttk.Button(
+            button_frame,
+            text="Open App",
+            command=self.open_app,
+            width=20
+        )
+        app_btn.pack(side=tk.LEFT, padx=10)
+
+    def open_app(self):
+        """Open the Flask app (app.py) and redirect to its web interface"""
+        try:
+            # Start the Flask app in a new subprocess
+            subprocess.Popen(["python", "c:/Users/uttam/OneDrive/Desktop/final_api/app.py"])
+
+            # Open the default web browser to the Flask app's URL
+            webbrowser.open("http://127.0.0.1:5000")  # Adjust the port if necessary
+            messagebox.showinfo("App", "The app is opening in your browser...")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to open the app: {str(e)}")
